@@ -20,8 +20,13 @@ class RoundedEventTile extends StatelessWidget {
   /// Description of the tile.
   final String? description;
 
+  // TODO: Remove this in next major release.
   /// Background color of tile.
   /// Default color is [Colors.blue]
+  ///
+  /// NOTE: This property is deprecated. Use [decoration] instead.
+  ///
+  @Deprecated("This property id deprecated. Use decoration instead.")
   final Color backgroundColor;
 
   /// If same tile can have multiple events.
@@ -34,7 +39,12 @@ class RoundedEventTile extends StatelessWidget {
   /// Margin of the tile. Default margin is [EdgeInsets.zero]
   final EdgeInsets margin;
 
+  // TODO: Remove this in next major release.
   /// Border radius of tile.
+  ///
+  /// NOTE: This property is deprecated. Use [decoration] instead.
+  ///
+  @Deprecated("This property id deprecated. Use decoration instead.")
   final BorderRadius borderRadius;
 
   /// Style for title
@@ -43,6 +53,16 @@ class RoundedEventTile extends StatelessWidget {
   /// Style for description
   final TextStyle? descriptionStyle;
 
+  /// Provides decoration for event tile container.
+  final BoxDecoration? decoration;
+
+  /// Provides padding for description.
+  ///
+  final EdgeInsets descriptionPadding;
+
+  /// Provides style for [totalEvents] indicators.
+  final TextStyle? extraEventsStyle;
+
   /// This is default tile to display in day view.
   const RoundedEventTile({
     Key? key,
@@ -50,11 +70,16 @@ class RoundedEventTile extends StatelessWidget {
     this.padding = EdgeInsets.zero,
     this.margin = EdgeInsets.zero,
     this.description,
+    @Deprecated("This property id deprecated. Use decoration instead.")
     this.borderRadius = BorderRadius.zero,
     this.totalEvents = 1,
+    @Deprecated("This property id deprecated. Use decoration instead.")
     this.backgroundColor = Colors.blue,
     this.titleStyle,
     this.descriptionStyle,
+    this.decoration,
+    this.descriptionPadding = const EdgeInsets.only(bottom: 15.0),
+    this.extraEventsStyle,
   }) : super(key: key);
 
   @override
@@ -62,10 +87,11 @@ class RoundedEventTile extends StatelessWidget {
     return Container(
       padding: padding,
       margin: margin,
-      decoration: BoxDecoration(
-        color: backgroundColor,
-        borderRadius: borderRadius,
-      ),
+      decoration: decoration ??
+          BoxDecoration(
+            color: backgroundColor,
+            borderRadius: borderRadius,
+          ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
@@ -86,7 +112,7 @@ class RoundedEventTile extends StatelessWidget {
           if (description?.isNotEmpty ?? false)
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.only(bottom: 15.0),
+                padding: descriptionPadding,
                 child: Text(
                   description!,
                   style: descriptionStyle ??
@@ -101,11 +127,11 @@ class RoundedEventTile extends StatelessWidget {
             Expanded(
               child: Text(
                 "+${totalEvents - 1} more",
-                style: (descriptionStyle ??
-                        TextStyle(
-                          color: backgroundColor.accent.withAlpha(200),
-                        ))
-                    .copyWith(fontSize: 17),
+                style: extraEventsStyle ??
+                    TextStyle(
+                      color: backgroundColor.accent.withAlpha(200),
+                      fontSize: 17,
+                    ),
               ),
             ),
         ],
@@ -122,10 +148,12 @@ class DayPageHeader extends CalendarPageHeader {
     VoidCallback? onNextDay,
     AsyncCallback? onTitleTapped,
     VoidCallback? onPreviousDay,
-    Color iconColor = Constants.black,
-    Color backgroundColor = Constants.headerBackground,
     StringProvider? dateStringBuilder,
     required DateTime date,
+    @Deprecated("Use Header Style to provide icon color")
+    Color iconColor = Constants.black,
+    @Deprecated("Use Header Style to provide background")
+    Color backgroundColor = Constants.headerBackground,
     HeaderStyle headerStyle = const HeaderStyle(),
   }) : super(
           key: key,

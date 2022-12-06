@@ -26,10 +26,32 @@ class CircularCell extends StatelessWidget {
   final Color backgroundColor;
 
   /// Title color when title is highlighted.
+  ///
+  /// NOTE: This property is deprecated use [highlightedTitleStyle] instead.
+  @Deprecated("This property is deprecated use highlightedTitleStyle instead.")
   final Color highlightedTitleColor;
 
   /// Color of cell title.
+  ///
+  /// NOTE: This property is deprecated use [highlightedTitleStyle] instead.
+  ///
+  @Deprecated("This property is deprecated use highlightedTitleStyle instead.")
   final Color titleColor;
+
+  /// Provides style for title when tile is highlighted.
+  final TextStyle? highlightedTitleStyle;
+
+  /// Provides style for title when tile is note highlighted.
+  final TextStyle? titleStyle;
+
+  /// Defines radius for circle.
+  final double? radius;
+
+  /// Defines maximum radius for circle.
+  final double? maxRadius;
+
+  /// Defines minimum radius for circle.
+  final double? minRadius;
 
   /// This class will defines how cell will be displayed.
   /// To get proper view user [CircularCell] with 1 [MonthView.cellAspectRatio].
@@ -39,8 +61,16 @@ class CircularCell extends StatelessWidget {
     this.events = const [],
     this.shouldHighlight = false,
     this.backgroundColor = Colors.blue,
+    @Deprecated("This property is deprecated use "
+        "highlightedTitleStyle instead.")
     this.highlightedTitleColor = Constants.white,
+    @Deprecated("This property is deprecated use titleStyle instead.")
     this.titleColor = Constants.black,
+    this.titleStyle,
+    this.highlightedTitleStyle,
+    this.radius,
+    this.minRadius,
+    this.maxRadius,
   }) : super(key: key);
 
   @override
@@ -48,12 +78,22 @@ class CircularCell extends StatelessWidget {
     return Center(
       child: CircleAvatar(
         backgroundColor: shouldHighlight ? backgroundColor : Colors.transparent,
+        radius: radius,
+        minRadius: minRadius,
+        maxRadius: maxRadius,
         child: Text(
           "${date.day}",
-          style: TextStyle(
-            fontSize: 20,
-            color: shouldHighlight ? highlightedTitleColor : titleColor,
-          ),
+          style: shouldHighlight
+              ? highlightedTitleStyle ??
+                  TextStyle(
+                    fontSize: 20,
+                    color: highlightedTitleColor,
+                  )
+              : titleStyle ??
+                  TextStyle(
+                    fontSize: 20,
+                    color: titleColor,
+                  ),
         ),
       ),
     );
@@ -75,6 +115,9 @@ class FilledCell<T extends Object?> extends StatelessWidget {
   final bool shouldHighlight;
 
   /// Defines background color of cell.
+  ///
+  /// NOTE: This property is deprecated. Use [decoration] instead.
+  @Deprecated("This property is deprecated use decoration instead.")
   final Color backgroundColor;
 
   /// Defines highlight color.
@@ -107,6 +150,9 @@ class FilledCell<T extends Object?> extends StatelessWidget {
   /// defines that show and hide cell not is in current month
   final bool hideDaysNotInMonth;
 
+  /// Provides decoration for filled cells.
+  final BoxDecoration? decoration;
+
   /// This class will defines how cell will be displayed.
   /// This widget will display all the events as tile below date title.
   const FilledCell({
@@ -116,6 +162,7 @@ class FilledCell<T extends Object?> extends StatelessWidget {
     this.isInMonth = false,
     this.hideDaysNotInMonth = true,
     this.shouldHighlight = false,
+    @Deprecated("This property is deprecated use decoration instead.")
     this.backgroundColor = Colors.blue,
     this.highlightColor = Colors.blue,
     this.onTileTap,
@@ -125,18 +172,20 @@ class FilledCell<T extends Object?> extends StatelessWidget {
     this.titleColor = Constants.black,
     this.highlightedTitleColor = Constants.white,
     this.dateStringBuilder,
+    this.decoration,
     this.onTileDoubleTap,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: backgroundColor,
+      decoration: decoration ??
+          BoxDecoration(
+            color: backgroundColor,
+          ),
       child: Column(
         children: [
-          SizedBox(
-            height: 5.0,
-          ),
+          SizedBox(height: 5.0),
           if (!(!isInMonth && hideDaysNotInMonth))
             CircleAvatar(
               radius: highlightRadius,
