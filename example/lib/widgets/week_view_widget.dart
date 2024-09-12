@@ -12,6 +12,7 @@ class WeekViewWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WeekView(
+      backgroundColor: Colors.black87,
       key: state,
       width: width,
       showLiveTimeLineInAllDays: true,

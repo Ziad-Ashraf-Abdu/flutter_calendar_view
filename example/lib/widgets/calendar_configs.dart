@@ -22,18 +22,9 @@ class CalendarConfig extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: EdgeInsets.only(left: 20, top: 20),
-          child: Text(
-            "Flutter Calendar Page",
-            style: TextStyle(
-              color: AppColors.black,
-              fontSize: 30,
-            ),
-          ),
-        ),
+        Padding(padding: EdgeInsets.only(left: 20, top: 20)),
         Divider(
-          color: AppColors.lightNavyBlue,
+          color: AppColors.coolGrey,
         ),
         Expanded(
           child: SingleChildScrollView(
@@ -46,7 +37,7 @@ class CalendarConfig extends StatelessWidget {
                   "Active View:",
                   style: TextStyle(
                     fontSize: 20.0,
-                    color: AppColors.black,
+                    color: AppColors.greenText,
                   ),
                 ),
                 Wrap(
@@ -68,8 +59,8 @@ class CalendarConfig extends StatelessWidget {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(7),
                             color: view == currentView
-                                ? AppColors.navyBlue
-                                : AppColors.bluishGrey,
+                                ? AppColors.navy
+                                : AppColors.coolGrey,
                           ),
                           child: Text(
                             view.name.capitalized,
@@ -92,7 +83,7 @@ class CalendarConfig extends StatelessWidget {
                   "Add Event: ",
                   style: TextStyle(
                     fontSize: 20.0,
-                    color: AppColors.black,
+                    color: AppColors.greenText,
                   ),
                 ),
                 SizedBox(

@@ -341,14 +341,14 @@ class _AddOrEditEventFormState extends State<AddOrEditEventForm> {
           Text(
             "Select event color",
             style: TextStyle(
-              color: AppColors.black,
+              color: AppColors.whiteText,
               fontSize: 25.0,
             ),
           ),
           Container(
             margin: const EdgeInsets.symmetric(vertical: 20.0),
             height: 1.0,
-            color: AppColors.bluishGrey,
+            color: AppColors.navy,
           ),
           ColorPicker(
             displayThumbColor: true,

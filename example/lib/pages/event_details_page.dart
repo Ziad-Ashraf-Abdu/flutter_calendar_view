@@ -8,6 +8,7 @@ class DetailsPage extends StatelessWidget {
   final CalendarEventData event;
 
   const DetailsPage({super.key, required this.event});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,17 +18,21 @@ class DetailsPage extends StatelessWidget {
         centerTitle: false,
         title: Text(
           event.title,
-          style: TextStyle(
-            color: event.color.accentColor,
-            fontSize: 20.0,
-            fontWeight: FontWeight.bold,
-          ),
+          style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                color: event.color.computeLuminance() > 0.5
+                    ? Colors.black
+                    : Colors.white,
+                fontSize: 20.0,
+                fontWeight: FontWeight.bold,
+              ),
         ),
         leading: IconButton(
           onPressed: context.pop,
           icon: Icon(
             Icons.arrow_back,
-            color: event.color.accentColor,
+            color: event.color.computeLuminance() > 0.5
+                ? Colors.black
+                : Colors.white,
           ),
         ),
       ),
@@ -36,6 +41,7 @@ class DetailsPage extends StatelessWidget {
         children: [
           Text(
             "Date: ${event.date.dateToStringWithFormat(format: "dd/MM/yyyy")}",
+            style: Theme.of(context).textTheme.bodyLarge,
           ),
           SizedBox(
             height: 15.0,
@@ -48,11 +54,13 @@ class DetailsPage extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("From"),
+                      Text("From",
+                          style: Theme.of(context).textTheme.bodyLarge),
                       Text(
                         event.startTime
                                 ?.getTimeInFormat(TimeStampFormat.parse_12) ??
                             "",
+                        style: Theme.of(context).textTheme.bodyMedium,
                       ),
                     ],
                   ),
@@ -62,11 +70,12 @@ class DetailsPage extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("To"),
+                      Text("To", style: Theme.of(context).textTheme.bodyLarge),
                       Text(
                         event.endTime
                                 ?.getTimeInFormat(TimeStampFormat.parse_12) ??
                             "",
+                        style: Theme.of(context).textTheme.bodyMedium,
                       ),
                     ],
                   ),
@@ -79,11 +88,12 @@ class DetailsPage extends StatelessWidget {
           ],
           if (event.description?.isNotEmpty ?? false) ...[
             Divider(),
-            Text("Description"),
+            Text("Description", style: Theme.of(context).textTheme.bodyLarge),
             SizedBox(
               height: 10.0,
             ),
-            Text(event.description!),
+            Text(event.description!,
+                style: Theme.of(context).textTheme.bodyMedium),
           ],
           const SizedBox(height: 50),
           Row(

@@ -23,7 +23,7 @@ class CalendarViews extends StatelessWidget {
     return Container(
       height: double.infinity,
       width: double.infinity,
-      color: AppColors.grey,
+      color: AppColors.coolGrey,
       child: Center(
         child: view == CalendarView.month
             ? MonthViewWidget(

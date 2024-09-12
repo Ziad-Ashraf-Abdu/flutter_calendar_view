@@ -23,7 +23,7 @@ class _DayViewPageDemoState extends State<DayViewPageDemo> {
       ),
       mobileWidget: Scaffold(
         floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.add),
+          child: Icon(Icons.add, color: Theme.of(context).iconTheme.color),
           elevation: 8,
           onPressed: () => context.pushRoute(CreateEventPage()),
         ),

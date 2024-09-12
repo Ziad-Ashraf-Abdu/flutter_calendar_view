@@ -16,6 +16,7 @@ class DayViewWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DayView(
+      backgroundColor: Colors.black87,
       key: state,
       width: width,
       startDuration: Duration(hours: 8),
@@ -39,7 +40,7 @@ class DayViewWidget extends StatelessWidget {
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
       },
       halfHourIndicatorSettings: HourIndicatorSettings(
-        color: Theme.of(context).dividerColor,
+        color: Colors.green,
         lineStyle: LineStyle.dashed,
       ),
       verticalLineOffset: 0,

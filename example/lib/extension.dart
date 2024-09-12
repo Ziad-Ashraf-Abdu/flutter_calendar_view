@@ -11,7 +11,7 @@ extension NavigationExtension on State {
       Navigator.of(context).push(MaterialPageRoute(builder: (context) => page));
 }
 
-extension NavigatorExtention on BuildContext {
+extension NavigatorExtension on BuildContext {
   Future<T?> pushRoute<T>(Widget page) =>
       Navigator.of(this).push<T>(MaterialPageRoute(builder: (context) => page));
 
@@ -19,7 +19,13 @@ extension NavigatorExtention on BuildContext {
 
   void showSnackBarWithText(String text) => ScaffoldMessenger.of(this)
     ..hideCurrentSnackBar()
-    ..showSnackBar(SnackBar(content: Text(text)));
+    ..showSnackBar(SnackBar(
+      content: Text(
+        text,
+        style: TextStyle(color: Theme.of(this).textTheme.bodyLarge?.color),
+      ),
+      backgroundColor: Theme.of(this).snackBarTheme.backgroundColor,
+    ));
 }
 
 extension DateUtils on DateTime {
@@ -113,10 +119,12 @@ extension DateUtils on DateTime {
 }
 
 extension ColorExtension on Color {
-  Color get accentColor =>
-      (blue / 2 >= 255 / 2 || red / 2 >= 255 / 2 || green / 2 >= 255 / 2)
-          ? AppColors.black
-          : AppColors.white;
+  Color get accentColor {
+    // Adjust to use a contrast color for dark themes
+    return (blue > 128 || red > 128 || green > 128)
+        ? AppColors.black
+        : AppColors.white;
+  }
 }
 
 extension StringExt on String {

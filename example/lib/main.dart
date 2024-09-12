@@ -2,14 +2,10 @@ import 'dart:ui';
 
 import 'package:calendar_view/calendar_view.dart';
 import 'package:flutter/material.dart';
-
+import 'app_colors.dart'; // Import your AppColors class
 import 'pages/home_page.dart';
 
 DateTime get _now => DateTime.now();
-
-void main() {
-  runApp(MyApp());
-}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -20,7 +16,31 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Flutter Calendar Page Demo',
         debugShowCheckedModeBanner: false,
-        theme: ThemeData.light(),
+        theme: ThemeData(
+          brightness: Brightness.dark,
+          primaryColor: AppColors.greenButton,
+          scaffoldBackgroundColor: AppColors.black,
+          appBarTheme: AppBarTheme(
+            backgroundColor: AppColors.black,
+            titleTextStyle: TextStyle(
+              color: AppColors.white,
+              fontSize: 20,
+            ),
+          ),
+          buttonTheme: ButtonThemeData(
+            buttonColor: AppColors.greenButton,
+            textTheme: ButtonTextTheme.primary,
+          ),
+          textTheme: TextTheme(
+            bodyLarge: TextStyle(color: AppColors.white),
+            bodyMedium: TextStyle(color: AppColors.white),
+          ),
+          colorScheme: ColorScheme.dark(
+            primary: AppColors.greenButton,
+            secondary: AppColors.greenText,
+            surface: AppColors.black,
+          ),
+        ),
         scrollBehavior: ScrollBehavior().copyWith(
           dragDevices: {
             PointerDeviceKind.trackpad,

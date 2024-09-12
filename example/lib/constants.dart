@@ -9,7 +9,7 @@ class AppConstants {
     borderRadius: BorderRadius.circular(7),
     borderSide: BorderSide(
       width: 2,
-      color: AppColors.lightNavyBlue,
+      color: AppColors.greenButton,
     ),
   );
 
@@ -19,7 +19,7 @@ class AppConstants {
         errorBorder: inputBorder.copyWith(
           borderSide: BorderSide(
             width: 2,
-            color: AppColors.red,
+            color: AppColors.greenButton,
           ),
         ),
         enabledBorder: inputBorder,
@@ -27,19 +27,19 @@ class AppConstants {
         focusedErrorBorder: inputBorder,
         hintText: "Event Title",
         hintStyle: TextStyle(
-          color: AppColors.black,
+          color: AppColors.whiteText,
           fontSize: 17,
         ),
         labelStyle: TextStyle(
-          color: AppColors.black,
+          color: AppColors.whiteText,
           fontSize: 17,
         ),
         helperStyle: TextStyle(
-          color: AppColors.black,
+          color: AppColors.whiteText,
           fontSize: 17,
         ),
         errorStyle: TextStyle(
-          color: AppColors.red,
+          color: AppColors.whiteText,
           fontSize: 12,
         ),
         contentPadding: EdgeInsets.symmetric(
